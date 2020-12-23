@@ -14,7 +14,7 @@
 
 # PACKAGES ---------------------------------------
 if(!require(pacman)) install.packages("pacman")
-pacman::p_load(dplyr, rvest, stringr, purrr)
+pacman::p_load(dplyr, rvest, stringr, purrr, tidyr, readr)
 
 
 
@@ -82,5 +82,45 @@ str_view(txt_fix, pattern = " votes, ")
 # missing white space
 str_view(txt_fix, pattern = "\\s*(votes?),\n(\\s*)")
 
-str_split(txt_fix, pattern = "\\s?(votes?),\n(\\s*)")
+# This is close--now we just need a way to combine everything
+txt_fix <- str_split(txt_fix, pattern = "\\s?(votes?),\n(\\s*)")
+
+
+
+
+
+txt_data <- character(2 / (3 *length(txt_fix)))
+txt_data[1] <- txt_fix[[1]]
+
+# I really don't like the nested loop structure: surely someone has come up with a way around this...
+# Regardless, working with lists that are not the same length is a topic for another day. What
+# we care about now is that this works:
+for(i in 2:length(txt_fix)){
+ for(j in 1:length(txt_fix[[i]])){
+   txt_data <- c(txt_data, txt_fix[[i]][j])
+ }
+}
+
+
+
+
+
+# first, let's 
+title <- txt_data[str_detect(txt_data, "^[a-zA-Z]+|1984")]
+votes <- txt_data[str_detect(txt_data, "^\\d$")]
+rating <- txt_data[str_detect(txt_data, "%$")]
+
+txt_data_tidy <- data.frame(title, votes, rating)
+
+
+# Now we need to change the data types from characters into something more useful
+# parse_number() is very similar to as.numeric(), but pulls out any number in the
+# input instead of requiring the string to be formatted properly beforehand:
+txt_data_tidy$votes <- parse_number(txt_data_tidy$votes)
+txt_data_tidy$rating <- parse_number(txt_data_tidy$rating)
+
+
+# Let's take a look at the tidy data frame:
+txt_data_tidy
+
 
