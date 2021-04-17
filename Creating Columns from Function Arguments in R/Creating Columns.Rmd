@@ -1,0 +1,112 @@
+---
+title: "Naming Columns with Function Arguments"
+author: "Connor Krenzer"
+date: "4/17/2021"
+output: html_document
+---
+
+This was written under R version 4.0.5.
+
+```{r setup, echo = FALSE}
+
+#If you do not know what this does, do not worry.
+#You can kindly ignore this chunk of code.
+knitr::opts_chunk$set(echo = TRUE,
+                      include = TRUE,
+                      results = "hide",
+                      error = TRUE,
+                      warning = TRUE,
+                      message = TRUE,
+                      eval = TRUE)
+
+```
+
+
+
+First things first. Let's load in dplyr. 
+
+```{r packages, message = FALSE}
+
+if(!require(pacman)) install.packages("pacman")
+pacman::p_load(dplyr)
+
+```
+
+
+
+
+
+
+
+Writing functions is key to being a successful R programmer. If you wanted to create a new column using a mutate() call, it would be of this form:
+
+```{r example, eval = FALSE}
+
+df %>% 
+  mutate(NEW_VARIABLE = "VALUES OF NEW VARIABLE")
+
+```
+
+The variable name is on the left-hand side of the expression and the values of the new column are on the right-hand side. That's pretty straightforward. But what happens when you try to do the same thing within a function call?
+
+Before that, let's remind ourselves of what happens when you create a new variable using the built-in `women` dataset:
+
+```{r new variable, results = "show"}
+
+women %>% 
+  mutate(bmi = (weight / (height^2)) * 703)
+
+
+```
+
+
+Great! We created a new variable called `bmi` with that mutate() call. Now, back to our question: "What happens when you try to create a new variable using the argument of a function as the new column's name?"
+
+There is only one way to find out. Let's make a function that calculates BMI and test it out:
+
+```{r bmi calculator, results = "show"}
+
+bmi_calculator <- function(df, NEW_VARIABLE_NAME){
+     df %>%
+          mutate(NEW_VARIABLE_NAME = (weight / (height^2)) * 703)
+}
+
+```
+
+Let's see just the first six observations:
+
+```{r bmi_calculator test, results = "show"}
+
+bmi_calculator(df = women, NEW_VARIABLE_NAME = "bmi") %>% 
+  head()
+
+```
+
+
+Rather than creating a new column called __bmi__, bmi_calculator() created a new column with the name of the parameter instead of the value of the parameter! mutate() assumed we wanted the name of the column to be NEW_VARIABLE_NAME instead of the value of the parameter that has the same name.
+
+How do we fix this? How do we get the new column to say "bmi"? We have to add double curly-braces and use the unpacking `:=` operator. Compare the first function to the one below:
+
+
+```{r working version}
+
+ bmi_calculator_that_works <- function(df, NEW_VARIABLE_NAME){
+     df %>%
+          mutate({{NEW_VARIABLE_NAME}} := (weight / (height^2)) * 703)
+}
+
+```
+
+The function now works as desired:
+
+```{r desired output, results = "show"}
+
+bmi_calculator_that_works(df = women, NEW_VARIABLE_NAME = "bmi") %>% 
+  head()
+
+```
+
+
+What do these changes do? The `:=` from {rlang} processes the left side before mutate() assigns a variable name, so the passed in variable-- **NEW_VARIABLE_NAME**--can get unpacked into the user's input--"bmi", in this case. In other words, `:=` recognizes that __{{NEW_VARIABLE_NAME}}__ contains a value, and that the user wants the value contained within __{{NEW_VARIABLE_NAME}}__ to be used as the name of the column.
+
+
