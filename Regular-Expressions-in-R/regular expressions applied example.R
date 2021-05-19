@@ -1,8 +1,8 @@
 # INTRO --------------------------------------------
 # This tutorial goes through the basics of regular expressions in R.
 
-# Wikipedia: "A regular expression ... is a sequence of characters
-# that define a search pattern.
+# Wikipedia says: "A regular expression ... is a sequence of characters
+# that define a search pattern."
 
 
 # Regular expressions are essentially the same across languages,
@@ -27,7 +27,7 @@ pacman::p_load(dplyr, rvest, stringr, purrr, tidyr, readr)
 # DATA ------------------------------------------
 # For simplicity's sake, I will collect some data for you.
 # If you do not know how to do web scraping, follow this
-# link to my GitHub repo: <>
+# link to my web scraping tutorial: https://www.youtube.com/watch?v=QYRqdH_9Yl8&list=PLU_CBDm5DXxVzGdGvaegyCMl6KDm36Gcv&index=1&t=156s
 
 
 # This data comes from a goodreads poll about which
@@ -41,10 +41,6 @@ text <- html_text(webpage_nodes)
 
 
 
-
-# This is what we want the final result to look like
-## (don't worry about the code, just take a peek at
-## the results)
 
 
 
