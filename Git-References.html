@@ -286,7 +286,7 @@ pre code {
 <h2>Commands</h2>
 <ul>
 <li><p><code>git checkout COMMIT_ID</code>: Shows the code as it was at this commit. This is a ‘read-only’ copy in that none of the changes made to the repository after running the command will be permanent.</p></li>
-<li><p><code>git checkout BRANCH_NAME</code>: Brings the code back to the most current version of the specified branch in the repository. Often times, this will be the <em>master</em> branch (<code>git checkout master</code>).</p></li>
+<li><p><code>git checkout BRANCH_NAME</code>: Brings the code back to the most current version of the specified branch in the repository. Often times, this will be the <em>main</em> branch (<code>git checkout main</code>).</p></li>
 <li><p><code>git revert COMMIT_ID</code>: Undoes a particular commit in the commit log. You will be brought to a scary-looking screen after running this line, but fear not! When that screen shows up, type <code>:wq</code> then hit <code>ENTER</code>. Everything will be ‘back to normal’ after doing so. Once complete, you have created a new commit that undoes the specified commit you wanted removed.</p></li>
 <li><p><code>git reset COMMIT_THAT_YOU_WANT_TO_RESET_TO_ID</code>: Reverts the repository back to the commit that you had initially. Locally, the files will not change (in case you want to keep specific files, you made a mistake, etc.), but they will be gone from your commit history. BE CAREFUL.</p></li>
 <li><p><code>git reset COMMIT_THAT_YOU_WANT_TO_RESET_TO_ID --hard</code>: Reverts the repository back to the state it was in the specified commit. None of the changes made after the specified commit will be retained. A hard reset. WARNING: THERE IS NO WAY TO GET BACK TO THOSE PREVIOUS COMMITS–UNLIKE THE REVERT COMMIT, ANYTHING UNDONE IN A RESET COMMIT IS DELETED FROM THE COMMIT HISTORY.</p></li>
@@ -297,9 +297,9 @@ pre code {
 <h1>Branches</h1>
 <div id="about-4" class="section level2">
 <h2>About</h2>
-<p>The master branch is typically the stable release of your code, the one you publish. For that reason, it is not the best idea to try out new features or new code on this branch. We do not want to find ourselves in a circumstance where we mess up our code with new features when others will be using said code.</p>
-<p>The idea behind a branch is to try out new ideas in an isolated environment and, if we like it, merge it back into the master branch.</p>
-<p>Instead of making multiple commits to the master branch, we make a new branch, add commits to this new branch, and then combine the two branches with a merge commit (so there is only one new commit on the master branch) if we want to implement the new features in the production code.</p>
+<p>The main branch is typically the stable release of your code, the one you publish. For that reason, it is not the best idea to try out new features or new code on this branch. We do not want to find ourselves in a circumstance where we mess up our code with new features when others will be using said code.</p>
+<p>The idea behind a branch is to try out new ideas in an isolated environment and, if we like it, merge it back into the main branch.</p>
+<p>Instead of making multiple commits to the main branch, we make a new branch, add commits to this new branch, and then combine the two branches with a merge commit (so there is only one new commit on the main branch) if we want to implement the new features in the production code.</p>
 <p>Git Bash will tell you which branch you are working in–it is in parentheses on the line above your cursor.</p>
 <p>NOTE: Any branch you create will be ‘a copy’ of the branch you are currently using (with the commands provided here).</p>
 </div>
@@ -309,8 +309,8 @@ pre code {
 <li><p><code>git branch -a</code>: Shows all branches in the repository. The branch with an asterisk next to it denotes which branch you are using.</p></li>
 <li><p><code>git branch NEW_BRANCH_NAME</code>: Creates a new branch of the specified branch name.</p></li>
 <li><p><code>git checkout BRANCH_NAME</code>: Switches to the specified branch name.</p></li>
-<li><p><code>git branch -d BRANCH_NAME</code>: Deletes the specified branch if the branch is merged (the ‘-d’ means ‘delete’). NOTE: switch to the master branch before deleting the branch by running <code>git checkout master</code>.</p></li>
-<li><p><code>git branch -D BRANCH_NAME</code>: Deletes the specified branch regardless of merge status (the ‘-D’ means ‘delete’). NOTE: switch to the master branch before deleting the branch by running <code>git checkout master</code>.</p></li>
+<li><p><code>git branch -d BRANCH_NAME</code>: Deletes the specified branch if the branch is merged (the ‘-d’ means ‘delete’). NOTE: switch to the main branch before deleting the branch by running <code>git checkout main</code>.</p></li>
+<li><p><code>git branch -D BRANCH_NAME</code>: Deletes the specified branch regardless of merge status (the ‘-D’ means ‘delete’). NOTE: switch to the main branch before deleting the branch by running <code>git checkout main</code>.</p></li>
 <li><p><code>git checkout -b BRANCH_NAME</code>: Creates the branch and checks it out (the ‘-b’ means create a branch). <em>Why would we use this? If, instead of creating a branch and then switching to it in a separate command, we can create the branch and switch to it in one command. It’s a time-saver.</em></p></li>
 </ul>
 </div>
@@ -319,12 +319,12 @@ pre code {
 <h1>Branch Merging and Conflicts</h1>
 <div id="about-5" class="section level2">
 <h2>About</h2>
-<p>After preparing code for production in different branches, we need a way to combine our branches back into the master branch. That’s where merging comes into play.</p>
+<p>After preparing code for production in different branches, we need a way to combine our branches back into the main branch. That’s where merging comes into play.</p>
 </div>
 <div id="commands-5" class="section level2">
 <h2>Commands</h2>
 <ul>
-<li><code>git merge BRANCH_NAME</code>: Merges the specified branch <em>into the branch you are currently using</em>. Sometimes, you will come across conflicts; if you have a conflict, make the necessary changes to the file (that usually means delete a bunch of stuff [&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD, ========, &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; BRANCH_NAME, lines of code, etc.] and keep only what you need–talk to the person who made the conflict to see what they want and also know that you should not be committing anything to the master branch if more than one branch exists), add the file back to the branch, do a git commit <em>without the ‘-m’ or a commit message</em>, and then you will have that scary screen again. At the scary screen, type <code>:wq</code> and hit ENTER. The merge should now be complete!</li>
+<li><code>git merge BRANCH_NAME</code>: Merges the specified branch <em>into the branch you are currently using</em>. Sometimes, you will come across conflicts; if you have a conflict, make the necessary changes to the file (that usually means delete a bunch of stuff [&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD, ========, &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; BRANCH_NAME, lines of code, etc.] and keep only what you need–talk to the person who made the conflict to see what they want and also know that you should not be committing anything to the main branch if more than one branch exists), add the file back to the branch, do a git commit <em>without the ‘-m’ or a commit message</em>, and then you will have that scary screen again. At the scary screen, type <code>:wq</code> and hit ENTER. The merge should now be complete!</li>
 </ul>
 </div>
 </div>
@@ -340,7 +340,7 @@ pre code {
 </div>
 <div id="pull-requests" class="section level3">
 <h3>Pull Requests</h3>
-<p>Pull requests are best done on GitHub.com. Once your code is ready to merge back into the master branch, you create a pull request. If approved (or maybe you are the one doing the approval!), it can be merged.</p>
+<p>Pull requests are best done on GitHub.com. Once your code is ready to merge back into the main branch, you create a pull request. If approved (or maybe you are the one doing the approval!), it can be merged.</p>
 </div>
 </div>
 <div id="commands-6" class="section level2">
@@ -406,7 +406,7 @@ pre code {
 <h3>Undoing Things</h3>
 <ul>
 <li><p><code>git checkout COMMIT_ID</code>: Shows the code as it was at this commit. This is a ‘read-only’ copy in that none of the changes made to the repository after running the command will be permanent.</p></li>
-<li><p><code>git checkout BRANCH_NAME</code>: Brings the code back to the most current version of the specified branch in the repository. Often times, this will be the <em>master</em> branch (<code>git checkout master</code>).</p></li>
+<li><p><code>git checkout BRANCH_NAME</code>: Brings the code back to the most current version of the specified branch in the repository. Often times, this will be the <em>main</em> branch (<code>git checkout main</code>).</p></li>
 <li><p><code>git revert COMMIT_ID</code>: Undoes a particular commit in the commit log. You will be brought to a scary-looking screen after running this line, but fear not! When that screen shows up, type <code>:wq</code> then hit <code>ENTER</code>. Everything will be ‘back to normal’ after doing so. Once complete, you have created a new commit that undoes the specified commit you wanted removed.</p></li>
 <li><p><code>git reset COMMIT_THAT_YOU_WANT_TO_RESET_TO_ID</code>: Reverts the repository back to the commit that you had initially. Locally, the files will not change (in case you want to keep specific files, you made a mistake, etc.), but they will be gone from your commit history. BE CAREFUL.</p></li>
 <li><p><code>git reset COMMIT_THAT_YOU_WANT_TO_RESET_TO_ID --hard</code>: Reverts the repository back to the state it was in the specified commit. None of the changes made after the specified commit will be retained. A hard reset. WARNING: THERE IS NO WAY TO GET BACK TO THOSE PREVIOUS COMMITS–UNLIKE THE REVERT COMMIT, ANYTHING UNDONE IN A RESET COMMIT IS DELETED FROM THE COMMIT HISTORY.</p></li>
@@ -418,15 +418,15 @@ pre code {
 <li><p><code>git branch -a</code>: Shows all branches in the repository. The branch with an asterisk next to it denotes which branch you are using.</p></li>
 <li><p><code>git branch NEW_BRANCH_NAME</code>: Creates a new branch of the specified branch name.</p></li>
 <li><p><code>git checkout BRANCH_NAME</code>: Switches to the specified branch name.</p></li>
-<li><p><code>git branch -d BRANCH_NAME</code>: Deletes the specified branch if the branch is merged (the ‘-d’ means ‘delete’). NOTE: switch to the master branch before deleting the branch by running <code>git checkout master</code>.</p></li>
-<li><p><code>git branch -D BRANCH_NAME</code>: Deletes the specified branch regardless of merge status (the ‘-D’ means ‘delete’). NOTE: switch to the master branch before deleting the branch by running <code>git checkout master</code>.</p></li>
+<li><p><code>git branch -d BRANCH_NAME</code>: Deletes the specified branch if the branch is merged (the ‘-d’ means ‘delete’). NOTE: switch to the main branch before deleting the branch by running <code>git checkout main</code>.</p></li>
+<li><p><code>git branch -D BRANCH_NAME</code>: Deletes the specified branch regardless of merge status (the ‘-D’ means ‘delete’). NOTE: switch to the main branch before deleting the branch by running <code>git checkout main</code>.</p></li>
 <li><p><code>git checkout -b BRANCH_NAME</code>: Creates the branch and checks it out (the ‘-b’ means create a branch). <em>Why would we use this? If, instead of creating a branch and then switching to it in a separate command, we can create the branch and switch to it in one command. It’s a time-saver.</em></p></li>
 </ul>
 </div>
 <div id="branch-merging-and-conflicts-1" class="section level3">
 <h3>Branch Merging and Conflicts</h3>
 <ul>
-<li><code>git merge BRANCH_NAME</code>: Merges the specified branch <em>into the branch you are currently using</em>. Sometimes, you will come across conflicts; if you have a conflict, make the necessary changes to the file (that usually means delete a bunch of stuff [&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD, ========, &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; BRANCH_NAME, lines of code, etc.] and keep only what you need–talk to the person who made the conflict to see what they want and also know that you should not be committing anything to the master branch if more than one branch exists), add the file back to the branch, do a git commit <em>without the ‘-m’ or a commit message</em>, and then you will have that scary screen again. At the scary screen, type <code>:wq</code> and hit ENTER. The merge should now be complete!</li>
+<li><code>git merge BRANCH_NAME</code>: Merges the specified branch <em>into the branch you are currently using</em>. Sometimes, you will come across conflicts; if you have a conflict, make the necessary changes to the file (that usually means delete a bunch of stuff [&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD, ========, &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; BRANCH_NAME, lines of code, etc.] and keep only what you need–talk to the person who made the conflict to see what they want and also know that you should not be committing anything to the main branch if more than one branch exists), add the file back to the branch, do a git commit <em>without the ‘-m’ or a commit message</em>, and then you will have that scary screen again. At the scary screen, type <code>:wq</code> and hit ENTER. The merge should now be complete!</li>
 </ul>
 </div>
 <div id="github-1" class="section level3">

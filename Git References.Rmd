@@ -191,7 +191,7 @@ NOTE: Use some version of **git log** to determine which commit you want to 'go 
 
 -   `git checkout COMMIT_ID`: Shows the code as it was at this commit. This is a 'read-only' copy in that none of the changes made to the repository after running the command will be permanent.
 
--   `git checkout BRANCH_NAME`: Brings the code back to the most current version of the specified branch in the repository. Often times, this will be the *master* branch (`git checkout master`).
+-   `git checkout BRANCH_NAME`: Brings the code back to the most current version of the specified branch in the repository. Often times, this will be the *main* branch (`git checkout main`).
 
 -   `git revert COMMIT_ID`: Undoes a particular commit in the commit log. You will be brought to a scary-looking screen after running this line, but fear not! When that screen shows up, type `:wq` then hit `ENTER`. Everything will be 'back to normal' after doing so. Once complete, you have created a new commit that undoes the specified commit you wanted removed.
 
@@ -211,11 +211,11 @@ NOTE: Use some version of **git log** to determine which commit you want to 'go 
 
 ## About
 
-The master branch is typically the stable release of your code, the one you publish. For that reason, it is not the best idea to try out new features or new code on this branch. We do not want to find ourselves in a circumstance where we mess up our code with new features when others will be using said code.
+The main branch is typically the stable release of your code, the one you publish. For that reason, it is not the best idea to try out new features or new code on this branch. We do not want to find ourselves in a circumstance where we mess up our code with new features when others will be using said code.
 
-The idea behind a branch is to try out new ideas in an isolated environment and, if we like it, merge it back into the master branch.
+The idea behind a branch is to try out new ideas in an isolated environment and, if we like it, merge it back into the main branch.
 
-Instead of making multiple commits to the master branch, we make a new branch, add commits to this new branch, and then combine the two branches with a merge commit (so there is only one new commit on the master branch) if we want to implement the new features in the production code.
+Instead of making multiple commits to the main branch, we make a new branch, add commits to this new branch, and then combine the two branches with a merge commit (so there is only one new commit on the main branch) if we want to implement the new features in the production code.
 
 Git Bash will tell you which branch you are working in--it is in parentheses on the line above your cursor.
 
@@ -229,9 +229,9 @@ NOTE: Any branch you create will be 'a copy' of the branch you are currently usi
 
 -   `git checkout BRANCH_NAME`: Switches to the specified branch name.
 
--   `git branch -d BRANCH_NAME`: Deletes the specified branch if the branch is merged (the '-d' means 'delete'). NOTE: switch to the master branch before deleting the branch by running `git checkout master`.
+-   `git branch -d BRANCH_NAME`: Deletes the specified branch if the branch is merged (the '-d' means 'delete'). NOTE: switch to the main branch before deleting the branch by running `git checkout main`.
 
--   `git branch -D BRANCH_NAME`: Deletes the specified branch regardless of merge status (the '-D' means 'delete'). NOTE: switch to the master branch before deleting the branch by running `git checkout master`.
+-   `git branch -D BRANCH_NAME`: Deletes the specified branch regardless of merge status (the '-D' means 'delete'). NOTE: switch to the main branch before deleting the branch by running `git checkout main`.
 
 -   `git checkout -b BRANCH_NAME`: Creates the branch and checks it out (the '-b' means create a branch). *Why would we use this? If, instead of creating a branch and then switching to it in a separate command, we can create the branch and switch to it in one command. It's a time-saver.*
 
@@ -249,11 +249,11 @@ NOTE: Any branch you create will be 'a copy' of the branch you are currently usi
 
 ## About
 
-After preparing code for production in different branches, we need a way to combine our branches back into the master branch. That's where merging comes into play.
+After preparing code for production in different branches, we need a way to combine our branches back into the main branch. That's where merging comes into play.
 
 ## Commands
 
--   `git merge BRANCH_NAME`: Merges the specified branch *into the branch you are currently using*. Sometimes, you will come across conflicts; if you have a conflict, make the necessary changes to the file (that usually means delete a bunch of stuff [\<\<\<\<\<\<\<\<\<\< HEAD, ========, \>\>\>\>\>\>\>\>\> BRANCH_NAME, lines of code, etc.] and keep only what you need--talk to the person who made the conflict to see what they want and also know that you should not be committing anything to the master branch if more than one branch exists), add the file back to the branch, do a git commit *without the '-m' or a commit message*, and then you will have that scary screen again. At the scary screen, type `:wq` and hit ENTER. The merge should now be complete!
+-   `git merge BRANCH_NAME`: Merges the specified branch *into the branch you are currently using*. Sometimes, you will come across conflicts; if you have a conflict, make the necessary changes to the file (that usually means delete a bunch of stuff [\<\<\<\<\<\<\<\<\<\< HEAD, ========, \>\>\>\>\>\>\>\>\> BRANCH_NAME, lines of code, etc.] and keep only what you need--talk to the person who made the conflict to see what they want and also know that you should not be committing anything to the main branch if more than one branch exists), add the file back to the branch, do a git commit *without the '-m' or a commit message*, and then you will have that scary screen again. At the scary screen, type `:wq` and hit ENTER. The merge should now be complete!
 
 
 
@@ -279,7 +279,7 @@ There are two types of repositories, **public** and **private**. If you create a
 
 ### Pull Requests
 
-Pull requests are best done on GitHub.com. Once your code is ready to merge back into the master branch, you create a pull request. If approved (or maybe you are the one doing the approval!), it can be merged.
+Pull requests are best done on GitHub.com. Once your code is ready to merge back into the main branch, you create a pull request. If approved (or maybe you are the one doing the approval!), it can be merged.
 
 ## Commands
 
@@ -388,7 +388,7 @@ Every project has different guidelines to contributing. Check the files in the r
 
 -   `git checkout COMMIT_ID`: Shows the code as it was at this commit. This is a 'read-only' copy in that none of the changes made to the repository after running the command will be permanent.
 
--   `git checkout BRANCH_NAME`: Brings the code back to the most current version of the specified branch in the repository. Often times, this will be the *master* branch (`git checkout master`).
+-   `git checkout BRANCH_NAME`: Brings the code back to the most current version of the specified branch in the repository. Often times, this will be the *main* branch (`git checkout main`).
 
 -   `git revert COMMIT_ID`: Undoes a particular commit in the commit log. You will be brought to a scary-looking screen after running this line, but fear not! When that screen shows up, type `:wq` then hit `ENTER`. Everything will be 'back to normal' after doing so. Once complete, you have created a new commit that undoes the specified commit you wanted removed.
 
@@ -407,9 +407,9 @@ Every project has different guidelines to contributing. Check the files in the r
 
 -   `git checkout BRANCH_NAME`: Switches to the specified branch name.
 
--   `git branch -d BRANCH_NAME`: Deletes the specified branch if the branch is merged (the '-d' means 'delete'). NOTE: switch to the master branch before deleting the branch by running `git checkout master`.
+-   `git branch -d BRANCH_NAME`: Deletes the specified branch if the branch is merged (the '-d' means 'delete'). NOTE: switch to the main branch before deleting the branch by running `git checkout main`.
 
--   `git branch -D BRANCH_NAME`: Deletes the specified branch regardless of merge status (the '-D' means 'delete'). NOTE: switch to the master branch before deleting the branch by running `git checkout master`.
+-   `git branch -D BRANCH_NAME`: Deletes the specified branch regardless of merge status (the '-D' means 'delete'). NOTE: switch to the main branch before deleting the branch by running `git checkout main`.
 
 -   `git checkout -b BRANCH_NAME`: Creates the branch and checks it out (the '-b' means create a branch). *Why would we use this? If, instead of creating a branch and then switching to it in a separate command, we can create the branch and switch to it in one command. It's a time-saver.*
 
@@ -418,7 +418,7 @@ Every project has different guidelines to contributing. Check the files in the r
 
 ### Branch Merging and Conflicts
 
--   `git merge BRANCH_NAME`: Merges the specified branch *into the branch you are currently using*. Sometimes, you will come across conflicts; if you have a conflict, make the necessary changes to the file (that usually means delete a bunch of stuff [\<\<\<\<\<\<\<\<\<\< HEAD, ========, \>\>\>\>\>\>\>\>\> BRANCH_NAME, lines of code, etc.] and keep only what you need--talk to the person who made the conflict to see what they want and also know that you should not be committing anything to the master branch if more than one branch exists), add the file back to the branch, do a git commit *without the '-m' or a commit message*, and then you will have that scary screen again. At the scary screen, type `:wq` and hit ENTER. The merge should now be complete!
+-   `git merge BRANCH_NAME`: Merges the specified branch *into the branch you are currently using*. Sometimes, you will come across conflicts; if you have a conflict, make the necessary changes to the file (that usually means delete a bunch of stuff [\<\<\<\<\<\<\<\<\<\< HEAD, ========, \>\>\>\>\>\>\>\>\> BRANCH_NAME, lines of code, etc.] and keep only what you need--talk to the person who made the conflict to see what they want and also know that you should not be committing anything to the main branch if more than one branch exists), add the file back to the branch, do a git commit *without the '-m' or a commit message*, and then you will have that scary screen again. At the scary screen, type `:wq` and hit ENTER. The merge should now be complete!
 
 
 
