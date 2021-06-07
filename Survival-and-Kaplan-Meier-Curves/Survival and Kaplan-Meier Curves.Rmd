@@ -1,0 +1,70 @@
+---
+title: "Survival and Kaplan-Meier Curves"
+author: "Connor Krenzer"
+date: "6/6/2021"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+This was written under R version 4.1.0
+
+```{r setup-packages, echo = FALSE}
+
+#If you do not know what this does, do not worry.
+#You can kindly ignore this chunk of code.
+knitr::opts_chunk$set(echo = TRUE,
+                      include = TRUE,
+                      results = "hide",
+                      error = TRUE,
+                      warning = FALSE,
+                      message = FALSE,
+                      eval = TRUE)
+
+# PACKAGES
+if(!require(pacman)) install.pacakges("pacman")
+pacman::p_load(ggplot2, tibble)
+
+```
+
+
+
+
+
+# Cumulative Distribution Functions
+
+Before anyone is ready to explore survival functions, we should know what a cumulative distribution unction is...
+
+
+```{r exponential}
+
+set.seed(2021)
+exponential <- rexp(n = 10000, rate = 0.5)
+
+ggplot() +
+  geom_histogram(mapping = aes(x = exponential, y = stat(count / sum(count))), fill = "red", bins = 90) +
+  ggtitle("Exponential Distriubtion with Lambda = 0.5") +
+  xlab("Exponential Random Variable Value") +
+  ylab("Proportion") +
+  xlim(0, 15)
+
+```
+
+
+```{r cdf}
+
+proportions <- exponential / sum(x = exponential)
+sum(proportions)
+
+```
+
+
+
+We just proved the exponential distribution we had right there is an honest-to-God probability density function!
+
+
+
+
+
+
+
