@@ -5,10 +5,7 @@ date: "6/5/2021"
 output:
   html_document:
     toc: yes
-    toc_depth: 2
-    toc_float:
-      collapsed: true
-      smooth_scroll: true
+    toc_depth: 1
 ---
 
 # Preface
