@@ -177,7 +177,9 @@ Now, there are a few things we need to do to get started with our repositories. 
 
 ## About
 
-If you need to go back to a previous 'save point' in your project's history, we are going to do so using one of three types of commits that 'undo' previous code. These commits are the following:
+If you simply want to bring a file (whose changes have not been committed) back to the state at the head of the current branch (you know, the way the file looked *before* you made any changes), you'll want to use the restore command.
+
+If, however, you need to go back to a previous 'save point' in your project's history, we are going to do so using one of three types of commits that 'undo' previous changes. These commits are the following:
 
 1.  Checkout commit (a 'read only' commit)
 
@@ -187,7 +189,10 @@ If you need to go back to a previous 'save point' in your project's history, we 
 
 NOTE: Use some version of **git log** to determine which commit you want to 'go back' to.
 
+
 ## Commands
+
+-   `git restore PATH_AND_FILENAME`: Reloads the version of the file found at the most recent commit.
 
 -   `git checkout COMMIT_ID`: Shows the code as it was at this commit. This is a 'read-only' copy in that none of the changes made to the repository after running the command will be permanent.
 
@@ -385,6 +390,8 @@ Every project has different guidelines to contributing. Check the files in the r
 
 
 ### Undoing Things
+
+-   `git restore PATH_AND_FILENAME`: Reloads the version of the file found at the most recent commit.
 
 -   `git checkout COMMIT_ID`: Shows the code as it was at this commit. This is a 'read-only' copy in that none of the changes made to the repository after running the command will be permanent.
 
