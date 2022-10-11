@@ -10,122 +10,134 @@ output:
 
 # Preface
 
-Much of this information was put together by [The Net Ninja](https://www.youtube.com/c/TheNetNinja) in his [Git & GitHub Tutorial for Beginners](https://youtube.com/playlist?list=PL4cUxeGkcC9goXbgTDQ0n_4TBzOO0ocPR) playlist on YouTube. He provides a quick yet thorough overview for people looking to get started with Git!
-
-The purpose of this document is to condense the information for people who like seeing things in writing or simply want a quick reference guide that provides context.
-
-
-
-
-
-
-
-
-
+The purpose of this document is to condense the information for
+people who like seeing things in writing or simply want a quick
+reference guide that provides context.
 
 
 # Introduction
 
-We want to use Git for **version source control**--the ability to store different versions of code and access them on command--and easy collaboration.
+People use Git for **version source control**--the ability
+to store and track different versions of code.
 
-Let's say you have a project you are working on, and your boss requests that you change a few features. That's fine enough, but what happens when--after making those changes--your boss changes her mind and asks to go back to the first version? You would have to 'undo' everything you did, which may take many hours if you did not save a copy or remember how a feature was implemented.
+Imagine you're assigned to a project and have to edit the
+implementation of a feature. After completing your work,
+the client is happy with the results. A few days later,
+however, the client reaches back out with a changed
+mind and asks to revert back to the old way
+the feature worked. What do you do? How do you
+rewrite your code to get it back to the way
+it was before?
 
-Git solves that problem by allowing you to go back to any **commit**--which can be thought of as a checkpoint or saving point--made to the project. Thanks to source control, a six hour task just turned into a sixty second task.
+Git solves that problem by allowing you to go back to
+any **commit**--which can be thought of as a checkpoint or
+saving point--made to the project. Thanks to source control,
+a potentially six hour task just turned into a sixty second task.
 
-Among other things, Git allows you to more easily collaborate with others. If there are two features being worked on, you and another person can make **branches** of a **repository** and work on each feature independently of one another, then **merge** the changes back into the main branch. Git allows us to 'divide and conquer.'
+Among other things, Git allows you to more easily collaborate with others.
+If there are two features being worked on, you and another person can
+make **branches** of a **repository** and work on each feature independently
+of one another, then **merge** the changes back into the main branch.
+Git allows us to 'divide and conquer.'
 
-**This guide assumes that you have already downloaded Git Bash and made a GitHub profile.**
-
-
-
-
-
-
-
-
-
-
-
+**This guide assumes that you have access to Git from the
+command line (you will likely get it through the Git for
+Windows installation if using Windows) and a GitHub profile.
+The information contained within this document applies to
+hosting services other than GitHub (like GitLab or Azure
+DevOps). GitHub is essentially a drop-in for an online
+hosting service.**
 
 
 # Setting Up Git
 
 ## About
 
-Once you've gone through the installation process and set up an account on GitHub, you are ready connect your account to your computer by using **Git Bash**. Git Bash is Git's command line interface.
+Once you've gone through the installation process and set up an account
+on GitHub, you are ready connect your account to your computer by
+using the command line. **Git Bash** is the most popular command line
+interface for Git on the Windows operating system.
 
-If you are an R programmer like me, you will also want to connect Git Bash to Rstudio. To do this go to **Tools\>Global Options\>Terminal** and set 'New terminals open with:' to Git Bash. Everything done in the remainder of this document can be done in the Rstudio terminal's Git Bash. Most IDEs have some sort of integration with Git.
+If you are an R programmer like me, you will want to connect
+your favorite command line program to Rstudio. To do this
+go to **Tools\>Global Options\>Terminal** and set
+'New terminals open with:' to your preferred command line.
+I recommend using Git Bash if you're on Windows.
+Everything done in the remainder of this document can be
+done in the Rstudio terminal's Git Bash. Most IDEs have
+some sort of integration with Git. I personally find
+integrated terminals to be a bit slow and instead keep
+a terminal open as a standalone process. But it's good
+to keep all of your tools together in one place--especially
+when you're learning.
 
 ## Commands
 
--   `git config --global user.name USER_NAME_HERE`: Set the user (your GitHub profile name).
+-   `git config --global user.name USER_NAME_HERE`:
+    Set the user (your GitHub profile name).
 
 -   `git config user.name`: See who the current user is.
 
--   `git config --global user.email USER_EMAIL@DOMAIN.com`: Set user email (an email connected to your GitHub profile).
+-   `git config --global user.email USER_EMAIL@DOMAIN.com`:
+    Set user email (an email connected to your GitHub profile).
 
 
-
-
-
-
-
-
-
-
-
-
-
-# Git Bash Essentials
+# BASH Essentials
 
 ## About
 
-This section goes over the 'essentials' of navigating through your file system, along with the creation and deletion of files. These are commands not directly related to the functioning of your repositories, but will almost always come in handy.
+This section covers the 'essentials' of navigating through your
+file system, along with the creation and deletion of files.
+These commands have nothing to do with Git proper but are vital
+to getting anything done from a command line. The keyboard was
+invented a long time before the mouse!
 
-NOTE: A **directory** is what Apple and Microsoft have taught you all of your life to call a 'folder'--the two are synonymous, but directory is the more official term. When you see, for example, the **mkdir** command below, know that the command really creates a directory within a directory (a folder within a folder: a subfolder).
+NOTE: A **directory** is what Apple and Microsoft have taught you
+to call a 'folder'--the two are synonymous, but directory is
+the more official term. When you see, for example, the
+**mkdir** command, know that it creates what you might be used
+to calling a folder.
 
-NOTE: In the commands below, you can add or remove files in sub-folders of the current directory (without having to first change your working directory) by specifying the file path before the name of the file you want to do something with.
-
-NOTE: If a file or folder name contains a space, put the name in single quotes (' ').
+NOTE: If a file or folder name contains a space,
+surround the path in quotes.
 
 ## Commands
 
--   `cd FILE_PATH`: Changes the current directory to the file path.
+-   `cd FILE_PATH`: Changes the CURRENT DIRECTORY to the file path.
 
--   `cd FOLDER_IN_DIRECTORY`: Moves the current directory 'down' into the specified folder found in the current directory. Using a '/' is optional when specifying the folder name--all you need is the name of the folder (**cd folder_name** is the same as **cd folder_name/**).
+-   `cd FOLDER_IN_DIRECTORY`: Moves the current directory 'down' into
+    the specified directory found in the current working directory.
 
--   `cd ..`: Moves to the current directory to the parent directory (moving one folder 'up').
+-   `cd ..`: Moves to the current directory to the parent directory
+    (move 'up' one folder).
 
--   `mkdir FOLDER_NAME`: Creates a folder in current directory.
+-   `mkdir FOLDER_NAME`: Creates a new directory in current working directory.
 
--   `touch FILE_NAME.EXTENSION`: Creates a file in the current directory (Ex. **touch words.txt** would create a text file called **words** in the current directory).
+-   `touch FILE_NAME.EXTENSION`: Creates a file in the current directory
+    (Ex. **touch words.txt** would create an empty text file called
+    **words** in the current working directory).
 
--   `rm FILE_NAME.EXTENSION`: Deletes the specified file in the current directory.
+-   `rm FILE_NAME.EXTENSION`: Deletes/removes the specified file
+    in the current directory.
 
--   `ls`: lists all files and folders (excluding the ones on the **gitignore**) in the current directory.
-
-
-
-
-
-
-
-
-
-
-
-
+-   `ls`: lists all files and folders in the current working directory.
 
 
 # Repository Setup and Status
 
 ## About
 
-The whole point of Git and GitHub is to have a location where code and its history are kept, tracked, and maintained. We will want to create a **repository**, which you can think of as a folder where Git tracks files and the changes made to those files. If you have trouble understanding how a repository works, take a look at [some of mine](https://github.com/Ckrenzer) (shameless plug). You will that repositories have files, folders, and folders within folders (and files within those folders!).
+The whole point of Git and GitHub is to have a location where code and its history
+is kept, tracked, and maintained. We want to create a **repository**, which
+you can think of as a folder where Git tracks files and the changes made to those files.
 
-A folder on your computer that contains the **.git** folder is called the repository's **root directory**, and any files in the root directory or any subfolder of the root directory will be tracked by Git. These files are what make up your repository.
+Any folder on your computer containing a **.git** folder is a Git repository.
+This directory is the repository's **root directory**, and any files in
+the root directory or any subfolder of the root directory will be tracked
+by Git.
 
-Now, there are a few things we need to do to get started with our repositories. Some things we will want to do are:
+Now, there are a few things we need to get started with a repository.
+Some things we should to do are:
 
 1.  Create a repository.
 
@@ -141,45 +153,43 @@ Now, there are a few things we need to do to get started with our repositories. 
 
 ## Commands
 
--   `git init`: Creates a Git repository in the current directory.
+-   `git init`: Creates a Git repository in the current working directory.
+    I recommend that you instead create your repository on a hosting service
+    (like GitHub) if you plan to use a hosting service (sometimes you'll only
+    want to track your changes locally).
 
--   `git status`: Shows changes made to the repository since last commit; shows files in the staging area (tracked files) and those not in the staging area--does not notice files in the gitignore.
+-   `git status`: Identifies changes made to the repository since your last commit.
 
--   `git add FILE_NAME.EXTENSION`: Adds a file to the staging area (tracked files) of the repository.
+-   `git add path_to_file_or_dir`: Adds a file, or all untracked files in a
+    directory, to the staging area of the repository.
 
--   `git add FOLDER_NAME`: Adds a folder (and all its contents) to the staging area (tracked files) of the repository.
-
--   `git add .`: Adds all files not in the gitignore to the staging area (everything you would see as 'untracked' in a git status).
-
--   `git rm --cached FILE_NAME.EXTENSION`: Removes file from the staging area of the repository.
-
--   `git rm --cached FOLDER_NAME`: Removes folder (and all its contents) from the staging area of the repository.
+-   `git add .`: Adds all files not in the gitignore to the staging area
+    (everything you would see as 'untracked' in a git status).
 
 -   `git rm --cached .`: Removes all files and folders from the staging area of the repository.
 
--   `git commit -a -m "COMMIT MESSAGE HERE"`: Makes a 'save point' in your repository and adds the (required) commit message. Make sure commit messages are logical and detail what changes were made since the last commit.
+-   `git commit -m "COMMIT MESSAGE HERE"`: Makes a 'save point' in your repository
+    with the (required) commit message. Make sure commit messages are logical and
+    succinctly detail changes made since the last commit.
 
 -   `git log`: Shows commit history, along with the commit ID.
 
--   `git log --oneline`: Shows condensed commit history--removes extraneous details from the commit log.
-
-
-
-
-
-
-
-
-
+The basic workflow is `git status; git add file_name; git commit -m "short description of changes";`
 
 
 # Undoing Things
 
 ## About
 
-If you simply want to bring a file (whose changes have not been committed) back to the state at the head of the current branch (you know, the way the file looked *before* you made any changes), you'll want to use the restore command.
+If you simply want to bring a file (whose changes have not been committed)
+back to the state at the head of the current branch (you know, the way the
+file looked *before* you made any changes), you'll want to use the
+**restore** command. I also suggest you look into the **rebase** command
+if you want to remove, edit, or combine commits.
 
-If, however, you need to go back to a previous 'save point' in your project's history, we are going to do so using one of three types of commits that 'undo' previous changes. These commits are the following:
+If, however, you need to go back to a previous 'save point' in your
+project's history, we are going to do so using one of three types of
+commits that 'undo' previous changes. These commits are the following:
 
 1.  Checkout commit (a 'read only' commit)
 
@@ -187,257 +197,335 @@ If, however, you need to go back to a previous 'save point' in your project's hi
 
 3.  Reset commit (permanently takes you back in time to a particular commit)
 
-NOTE: Use some version of **git log** to determine which commit you want to 'go back' to.
+NOTE: Use **git log** to determine which commit you want to 'go back' to.
 
 
 ## Commands
 
--   `git restore PATH_AND_FILENAME`: Reloads the version of the file found at the most recent commit.
+-   `git restore PATH_AND_FILENAME`: Reloads the version of the file found at
+    the most recent commit.
 
--   `git checkout COMMIT_ID`: Shows the code as it was at this commit. This is a 'read-only' copy in that none of the changes made to the repository after running the command will be permanent.
+-   `git rebase HEAD~number_of_commits_that_you_want_to_change -i`: Allows you to
+    rework commits in the history. You can reword commit messages, combine commits
+    together, or remove commits outright, among other things.
 
--   `git checkout BRANCH_NAME`: Brings the code back to the most current version of the specified branch in the repository. Often times, this will be the *main* branch (`git checkout main`).
+-   `git checkout COMMIT_ID`: Shows the code as it was at the specified commit.
+    This is a 'read-only' copy in that none of the changes made to the
+    repository after running the command will be permanent.
 
--   `git revert COMMIT_ID`: Undoes a particular commit in the commit log. You will be brought to a scary-looking screen after running this line, but fear not! When that screen shows up, type `:wq` then hit `ENTER`. Everything will be 'back to normal' after doing so. Once complete, you have created a new commit that undoes the specified commit you wanted removed.
+-   `git revert COMMIT_ID`: Undoes a particular commit in the commit log.
+    If some strange text program pops up, you are in a program called Vim.
+    Vim is a wonderful text editor and I suggest you learn it, but for now
+    know that you can exit out of Vim by typing `:wq` then ENTER.
+    Once complete, you have created a new commit that undoes
+    the specified commit you wanted removed.
 
--   `git reset COMMIT_THAT_YOU_WANT_TO_RESET_TO_ID`: Reverts the repository back to the commit that you had initially. Locally, the files will not change (in case you want to keep specific files, you made a mistake, etc.), but they will be gone from your commit history. BE CAREFUL.
+-   `git reset COMMIT_THAT_YOU_WANT_TO_RESET_TO_ID`: Reverts the repository back to
+    the commit that you had at the supplied commit ID. Locally, the files will
+    not change (in case you want to keep specific files, you made a mistake,
+    etc.), but they will be gone from your commit history. BE CAREFUL.
 
--   `git reset COMMIT_THAT_YOU_WANT_TO_RESET_TO_ID --hard`: Reverts the repository back to the state it was in the specified commit. None of the changes made after the specified commit will be retained. A hard reset. WARNING: THERE IS NO WAY TO GET BACK TO THOSE PREVIOUS COMMITS--UNLIKE THE REVERT COMMIT, ANYTHING UNDONE IN A RESET COMMIT IS DELETED FROM THE COMMIT HISTORY.
-
-
-
-
-
-
-
+-   `git reset COMMIT_THAT_YOU_WANT_TO_RESET_TO_ID --hard`: Reverts the repository
+    back to the state it was in the specified commit. None of the changes made after
+    the specified commit will be retained. A hard reset. WARNING: THERE IS NO WAY TO
+    GET BACK TO THOSE PREVIOUS COMMITS--UNLIKE THE REVERT COMMIT, ANYTHING UNDONE IN
+    A RESET COMMIT IS DELETED FROM THE COMMIT HISTORY.
 
 
 # Branches
 
 ## About
 
-The main branch is typically the stable release of your code, the one you publish. For that reason, it is not the best idea to try out new features or new code on this branch. We do not want to find ourselves in a circumstance where we mess up our code with new features when others will be using said code.
+The main branch is typically the stable release of your code,
+the one you publish. For that reason, you should not perform
+active development on it. We do not want to find ourselves
+in a circumstance where we mess up our code with new features
+when others will be using said code.
 
-The idea behind a branch is to try out new ideas in an isolated environment and, if we like it, merge it back into the main branch.
+The idea behind a branch is to try out new ideas in an isolated
+environment and, if it meets all requirements, merge it back
+into the main branch.
 
-Instead of making multiple commits to the main branch, we make a new branch, add commits to this new branch, and then combine the two branches with a merge commit (so there is only one new commit on the main branch) if we want to implement the new features in the production code.
+Instead of writing commits directly to the main,
+make a new branch. Add commits to this new branch and
+combine the two with a merge commit or a pull request.
 
-Git Bash will tell you which branch you are working in--it is in parentheses on the line above your cursor.
+Git Bash will tell you which branch you are working in--it is in
+parentheses on the line above your cursor.
 
-NOTE: Any branch you create will be 'a copy' of the branch you are currently using (with the commands provided here).
+NOTE: Any branch you create will be 'a copy' of the branch you
+are currently using.
 
 ## Commands
 
--   `git branch -a`: Shows all branches in the repository. The branch with an asterisk next to it denotes which branch you are using.
+-   `git branch -a`: Shows all branches in the repository. The branch
+    with an asterisk next to it denotes which branch you are using.
 
 -   `git branch NEW_BRANCH_NAME`: Creates a new branch of the specified branch name.
 
--   `git checkout BRANCH_NAME`: Switches to the specified branch name.
+-   `git switch BRANCH_NAME`: Switches to the specified branch name.
 
--   `git branch -d BRANCH_NAME`: Deletes the specified branch if the branch is merged (the '-d' means 'delete'). NOTE: switch to the main branch before deleting the branch by running `git checkout main`.
+-   `git branch -d BRANCH_NAME`: Deletes the specified branch if the branch
+    is merged (the '-d' means 'delete'). NOTE: switch to the main branch
+    before deleting the branch by running `git checkout main`.
 
--   `git branch -D BRANCH_NAME`: Deletes the specified branch regardless of merge status (the '-D' means 'delete'). NOTE: switch to the main branch before deleting the branch by running `git checkout main`.
+-   `git branch -D BRANCH_NAME`: Deletes the specified branch regardless of
+    merge status (the '-D' means 'delete'). NOTE: switch to the main branch
+    before deleting the branch by running `git checkout main`.
 
--   `git checkout -b BRANCH_NAME`: Creates the branch and checks it out (the '-b' means create a branch). *Why would we use this? If, instead of creating a branch and then switching to it in a separate command, we can create the branch and switch to it in one command. It's a time-saver.*
-
-
-
-
-
-
-
-
-
+-   `git switch -c BRANCH_NAME`: Creates the branch and moves to it in one motion.
 
 
 # Branch Merging and Conflicts
 
 ## About
 
-After preparing code for production in different branches, we need a way to combine our branches back into the main branch. That's where merging comes into play.
+After preparing code for production in different branches, we
+need a way to combine all of the changes made across them back together.
+That's where the merge command comes into play.
 
 ## Commands
 
--   `git merge BRANCH_NAME`: Merges the specified branch *into the branch you are currently using*. Sometimes, you will come across conflicts; if you have a conflict, make the necessary changes to the file (that usually means delete a bunch of stuff [\<\<\<\<\<\<\<\<\<\< HEAD, ========, \>\>\>\>\>\>\>\>\> BRANCH_NAME, lines of code, etc.] and keep only what you need--talk to the person who made the conflict to see what they want and also know that you should not be committing anything to the main branch if more than one branch exists), add the file back to the branch, do a git commit *without the '-m' or a commit message*, and then you will have that scary screen again. At the scary screen, type `:wq` and hit ENTER. The merge should now be complete!
+-   `git merge BRANCH_NAME`: Merges the specified branch
+    *into the branch you are currently using*. Sometimes,
+    you will come across conflicts; if you have a conflict,
+    make the necessary changes to the file (that usually means delete a bunch of stuff
+    [\<\<\<\<\<\<\<\<\<\< HEAD, ========, \>\>\>\>\>\>\>\>\> BRANCH_NAME, lines of code, etc.]
+    and keep only what you need--talk to the person who made the conflicting changes to see what
+    they want if you are unsure of what should stay and what shouldn't. Also know that
+    you should not commit anything to the main branch directly.), add the file back
+    to the branch, do a git commit *without the '-m' or a commit message*.
+    If Vim opens, type `:wq` and hit ENTER.
+
+NOTE: Pull requests are conceptually the UI equivalent of merge commits. Depending on the
+branch security, a merge commit may fail not be allowed and a pull request will be
+necessary to integrate your changes back into the project. Pull requests are generally
+easier to do than merge commits, but merging is important for resolving conflicts
+between branches.
 
 
-
-
-
-
-
-
-
-
-
-# GitHub
+# Hosted Repos
 
 ## About
 
-Most of the time, you will work on projects in local repositories and then **push** them online to the central, hosted project repository on [GitHub.com](https://github.com/). When code gets pushed to the hosted repository, someone can **pull** the code onto their local machine to continue developing using the changes that someone else made. This is what makes collaboration possible between developers.
-
-For simplicity, create a repository on GitHub (Click on the green 'New Repository' or 'Start Your First Repository' button when looking at your GitHub profile), **clone** the repository onto your local device, and add any files you need to add.
+Most of the time, you will work on projects in local repositories and
+then **push** them online to the central, hosted project repository on
+GitHub.com, GitLab, Azure DevOps, etc.. When code gets pushed to the hosted
+repository (the changes you've saved with a commit are uploaded to the internet),
+someone can **pull** the code onto their local machine to
+continue developing off of the changes that someone else made. This is
+what makes collaboration possible between developers.
 
 ### Creating a Repository on GitHub
 
-There are two types of repositories, **public** and **private**. If you create a public repository, be careful about what you upload because anyone on the internet can see what you put on there. Always add a **README**, **gitignore** (it allows you to add folders and files that your repository will ignore in the tracking process), and **license**. I'm no legal expert, but a license sounds like it might be useful dealing with plagiarism.
+There are two types of repositories, **public** and **private**.
+If you create a public repository, be careful about what you upload
+because anyone on the internet can see what you put on there. Always
+add a **README**, **gitignore** (it allows you to add folders and files
+that your repository will ignore in the tracking process), and **license**.
+I'm no legal expert, but a license sounds like it might be useful
+dealing with plagiarism.
 
 ### Pull Requests
 
-Pull requests are best done on GitHub.com. Once your code is ready to merge back into the main branch, you create a pull request. If approved (or maybe you are the one doing the approval!), it can be merged.
+Once your code is ready to merge back into the main branch,
+create a pull request on the repository's hosting service.
+If approved (maybe you are the one doing the approval!),
+it can be merged.
 
 ## Commands
 
--   `git clone REPO_URL`: Makes a local version of the specified GitHub repository.
+-   `git clone REPO_URL`: Makes a local version of the specified GitHub repository
+    in the current working directory.
 
--   `git push REPO_URL BRANCH_NAME`: Moves the code written on your local version to the hosted version on GitHub. The repository url can be found by clicking the green 'Code' button in your repository on GitHub.com and clicking on the clipboard next to the url.
+-   `git push REPO_URL BRANCH_NAME`: Moves the code written on your local version
+    to the hosted (online) version. The repository URL is often stored as an alias
+    called *origin* (see next bullet). On GitHub.com, the repository url can be found
+    by clicking the green 'Code' button in your repository and clicking on the
+    clipboard next to the url.
 
--   `git add remote REPO_ALIAS_NAME REPO_URL`: Allows you to use an alias for the repository's url instead of having to write the URL in the REPO_URL field of all future commands (in a git push, for example). 'origin' is a very popular alias to use. Aliases must be created for each repository, *but only once*--you should not have to do it when cloning a repository with aliases already created.
+-   `git add remote REPO_ALIAS_NAME REPO_URL`: Allows you to use an alias for the
+    repository's url instead of having to write the URL in the REPO_URL field of
+    all future commands (in a git push, for example). 'origin' is a very popular
+    alias to use. Aliases must be created for each repository, *but only once*--you
+    should not have to do it when cloning a repository that already has aliases.
 
 -   `git remote -v`: Shows all of a repository's aliases.
 
--   `git pull REPO_URL BRANCH_NAME`: Fetches all of the code from the hosted repository and merges it into your your local version of the branch, updating all of your local files. *You use this whenever someone else made a change that affects your branch of code--your code gets updated*.
-
-
-
-
-
-
-
-
+-   `git pull REPO_URL BRANCH_NAME`: Fetches all of the code from the hosted repository
+    and merges it into your your local version of the branch, updating all of your local
+    files. *Use this to get the most up-to-date code on a branch.*
 
 
 # Forking and Contributing
 
 ## About
 
-Often used to contribute to an open source project. If you come across someone else's code on GitHub, you won't be able to contribute directly to that person's branches. What you have to do instead is **fork** that repository, which is a copy of the repository from the project creator's account to your own account. Doing so creates that repository on your own account and you can begin working on it as if it were your own.
+Forks are often used to contribute to an open source project. If you come across someone
+else's code on GitHub, you won't be able to contribute directly to that person's
+branches. What you have to do instead is **fork** that repository, which is a copy
+of the repository from the project creator's account to your own account. Doing so
+creates that repository on your own account and you can begin working on it as if
+it were your own.
 
-To contribute the changes you've made to the original repository, create a 'New pull request' on GitHub. Create the pull request and then wait for the repository admins to review and merge the contribution (or reject it!).
+To contribute the changes you've made to the original repository, create a
+'New pull request' on GitHub. Create the pull request and then wait for the
+repository admins to review and merge the contribution (or reject it!).
 
-If someone contributes to your own repository, click on the 'Pull requests' tab of your repository, review the changes, make comments, and ultimately decide whether to accept or reject the contribution by clicking the green 'Merge pull request' button.
+If someone contributes to your own repository, click on the 'Pull requests'
+tab of your repository, review the changes, make comments, and ultimately decide
+whether to accept or reject the contribution by clicking the green 'Merge pull request'
+button.
 
-Every project has different guidelines to contributing. Check the files in the repository for these kinds of contribution rules.
-
-
-
-
-
-
-
-
-
-
+Every project has different guidelines to contributing. Check the files in the
+repository for these kinds of contribution rules.
 
 
 # All Commands In This Document
 
 ### Setting Up Git
 
--   `git config --global user.name USER_NAME_HERE`: Set the user (your GitHub profile name).
+-   `git config --global user.name USER_NAME_HERE`:
+    Set the user (your GitHub profile name).
 
 -   `git config user.name`: See who the current user is.
 
--   `git config --global user.email USER_EMAIL@DOMAIN.com`: Set user email (an email connected to your GitHub profile).
+-   `git config --global user.email USER_EMAIL@DOMAIN.com`:
+    Set user email (an email connected to your GitHub profile).
 
 
+### BASH Essentials
 
+-   `cd FILE_PATH`: Changes the CURRENT DIRECTORY to the file path.
 
-### Git Bash Essentials
+-   `cd FOLDER_IN_DIRECTORY`: Moves the current directory 'down' into
+    the specified directory found in the current working directory.
 
--   `cd FILE_PATH`: Changes the current directory to the file path.
+-   `cd ..`: Moves to the current directory to the parent directory
+    (move 'up' one folder).
 
--   `cd FOLDER_IN_DIRECTORY`: Moves the current directory 'down' into the specified folder found in the current directory. Using a '/' is optional when specifying the folder name--all you need is the name of the folder (**cd folder_name** is the same as **cd folder_name/**).
+-   `mkdir FOLDER_NAME`: Creates a new directory in current working directory.
 
--   `cd ..`: Moves to the current directory to the parent directory (moving one folder 'up').
+-   `touch FILE_NAME.EXTENSION`: Creates a file in the current directory
+    (Ex. **touch words.txt** would create an empty text file called
+    **words** in the current working directory).
 
--   `mkdir FOLDER_NAME`: Creates a folder in current directory.
+-   `rm FILE_NAME.EXTENSION`: Deletes/removes the specified file
+    in the current directory.
 
--   `touch FILE_NAME.EXTENSION`: Creates a file in the current directory (Ex. **touch words.txt** would create a text file called **words** in the current directory).
-
--   `rm FILE_NAME.EXTENSION`: Deletes the specified file in the current directory.
-
--   `ls`: lists all files and folders (excluding the ones on the **gitignore**) in the current directory.
-
-
+-   `ls`: lists all files and folders in the current working directory.
 
 
 ### Repository Setup and Status
 
--   `git init`: Creates a Git repository in the current directory.
+-   `git init`: Creates a Git repository in the current working directory.
+    I recommend that you instead create your repository on a hosting service
+    (like GitHub) if you plan to use a hosting service (sometimes you'll only
+    want to track your changes locally).
 
--   `git status`: Shows changes made to the repository since last commit; shows files in the staging area (tracked files) and those not in the staging area--does not notice files in the gitignore.
+-   `git status`: Identifies changes made to the repository since your last commit.
 
--   `git add FILE_NAME.EXTENSION`: Adds a file to the staging area (tracked files) of the repository.
+-   `git add path_to_file_or_dir`: Adds a file, or all untracked files in a
+    directory, to the staging area of the repository.
 
--   `git add FOLDER_NAME`: Adds a folder (and all its contents) to the staging area (tracked files) of the repository.
-
--   `git add .`: Adds all files not in the gitignore to the staging area (everything you would see as 'untracked' in a git status).
-
--   `git rm --cached FILE_NAME.EXTENSION`: Removes file from the staging area of the repository.
-
--   `git rm --cached FOLDER_NAME`: Removes folder (and all its contents) from the staging area of the repository.
+-   `git add .`: Adds all files not in the gitignore to the staging area
+    (everything you would see as 'untracked' in a git status).
 
 -   `git rm --cached .`: Removes all files and folders from the staging area of the repository.
 
--   `git commit -a -m "COMMIT MESSAGE HERE"`: Makes a 'save point' in your repository and adds the (required) commit message. Make sure commit messages are logical and detail what changes were made since the last commit.
+-   `git commit -m "COMMIT MESSAGE HERE"`: Makes a 'save point' in your repository
+    with the (required) commit message. Make sure commit messages are logical and
+    succinctly detail changes made since the last commit.
 
 -   `git log`: Shows commit history, along with the commit ID.
-
--   `git log --oneline`: Shows condensed commit history--removes extraneous details from the commit log.
-
-
 
 
 ### Undoing Things
 
--   `git restore PATH_AND_FILENAME`: Reloads the version of the file found at the most recent commit.
+-   `git restore PATH_AND_FILENAME`: Reloads the version of the file found at
+    the most recent commit.
 
--   `git checkout COMMIT_ID`: Shows the code as it was at this commit. This is a 'read-only' copy in that none of the changes made to the repository after running the command will be permanent.
+-   `git rebase HEAD~number_of_commits_that_you_want_to_change -i`: Allows you to
+    rework commits in the history. You can reword commit messages, combine commits
+    together, or remove commits outright, among other things.
 
--   `git checkout BRANCH_NAME`: Brings the code back to the most current version of the specified branch in the repository. Often times, this will be the *main* branch (`git checkout main`).
+-   `git checkout COMMIT_ID`: Shows the code as it was at the specified commit.
+    This is a 'read-only' copy in that none of the changes made to the
+    repository after running the command will be permanent.
 
--   `git revert COMMIT_ID`: Undoes a particular commit in the commit log. You will be brought to a scary-looking screen after running this line, but fear not! When that screen shows up, type `:wq` then hit `ENTER`. Everything will be 'back to normal' after doing so. Once complete, you have created a new commit that undoes the specified commit you wanted removed.
+-   `git revert COMMIT_ID`: Undoes a particular commit in the commit log.
+    If some strange text program pops up, you are in a program called Vim.
+    Vim is a wonderful text editor and I suggest you learn it, but for now
+    know that you can exit out of Vim by typing `:wq` then ENTER.
+    Once complete, you have created a new commit that undoes
+    the specified commit you wanted removed.
 
--   `git reset COMMIT_THAT_YOU_WANT_TO_RESET_TO_ID`: Reverts the repository back to the commit that you had initially. Locally, the files will not change (in case you want to keep specific files, you made a mistake, etc.), but they will be gone from your commit history. BE CAREFUL.
+-   `git reset COMMIT_THAT_YOU_WANT_TO_RESET_TO_ID`: Reverts the repository back to
+    the commit that you had at the supplied commit ID. Locally, the files will
+    not change (in case you want to keep specific files, you made a mistake,
+    etc.), but they will be gone from your commit history. BE CAREFUL.
 
--   `git reset COMMIT_THAT_YOU_WANT_TO_RESET_TO_ID --hard`: Reverts the repository back to the state it was in the specified commit. None of the changes made after the specified commit will be retained. A hard reset. WARNING: THERE IS NO WAY TO GET BACK TO THOSE PREVIOUS COMMITS--UNLIKE THE REVERT COMMIT, ANYTHING UNDONE IN A RESET COMMIT IS DELETED FROM THE COMMIT HISTORY.
-
-
+-   `git reset COMMIT_THAT_YOU_WANT_TO_RESET_TO_ID --hard`: Reverts the repository
+    back to the state it was in the specified commit. None of the changes made after
+    the specified commit will be retained. A hard reset. WARNING: THERE IS NO WAY TO
+    GET BACK TO THOSE PREVIOUS COMMITS--UNLIKE THE REVERT COMMIT, ANYTHING UNDONE IN
+    A RESET COMMIT IS DELETED FROM THE COMMIT HISTORY.
 
 
 ### Branches
 
--   `git branch -a`: Shows all branches in the repository. The branch with an asterisk next to it denotes which branch you are using.
+-   `git branch -a`: Shows all branches in the repository. The branch
+    with an asterisk next to it denotes which branch you are using.
 
 -   `git branch NEW_BRANCH_NAME`: Creates a new branch of the specified branch name.
 
--   `git checkout BRANCH_NAME`: Switches to the specified branch name.
+-   `git switch BRANCH_NAME`: Switches to the specified branch name.
 
--   `git branch -d BRANCH_NAME`: Deletes the specified branch if the branch is merged (the '-d' means 'delete'). NOTE: switch to the main branch before deleting the branch by running `git checkout main`.
+-   `git branch -d BRANCH_NAME`: Deletes the specified branch if the branch
+    is merged (the '-d' means 'delete'). NOTE: switch to the main branch
+    before deleting the branch by running `git checkout main`.
 
--   `git branch -D BRANCH_NAME`: Deletes the specified branch regardless of merge status (the '-D' means 'delete'). NOTE: switch to the main branch before deleting the branch by running `git checkout main`.
+-   `git branch -D BRANCH_NAME`: Deletes the specified branch regardless of
+    merge status (the '-D' means 'delete'). NOTE: switch to the main branch
+    before deleting the branch by running `git checkout main`.
 
--   `git checkout -b BRANCH_NAME`: Creates the branch and checks it out (the '-b' means create a branch). *Why would we use this? If, instead of creating a branch and then switching to it in a separate command, we can create the branch and switch to it in one command. It's a time-saver.*
-
-
+-   `git switch -c BRANCH_NAME`: Creates the branch and moves to it in one motion.
 
 
 ### Branch Merging and Conflicts
 
--   `git merge BRANCH_NAME`: Merges the specified branch *into the branch you are currently using*. Sometimes, you will come across conflicts; if you have a conflict, make the necessary changes to the file (that usually means delete a bunch of stuff [\<\<\<\<\<\<\<\<\<\< HEAD, ========, \>\>\>\>\>\>\>\>\> BRANCH_NAME, lines of code, etc.] and keep only what you need--talk to the person who made the conflict to see what they want and also know that you should not be committing anything to the main branch if more than one branch exists), add the file back to the branch, do a git commit *without the '-m' or a commit message*, and then you will have that scary screen again. At the scary screen, type `:wq` and hit ENTER. The merge should now be complete!
+-   `git merge BRANCH_NAME`: Merges the specified branch
+    *into the branch you are currently using*. Sometimes,
+    you will come across conflicts; if you have a conflict,
+    make the necessary changes to the file (that usually means delete a bunch of stuff
+    [\<\<\<\<\<\<\<\<\<\< HEAD, ========, \>\>\>\>\>\>\>\>\> BRANCH_NAME, lines of code, etc.]
+    and keep only what you need--talk to the person who made the conflicting changes to see what
+    they want if you are unsure of what should stay and what shouldn't. Also know that
+    you should not commit anything to the main branch directly.), add the file back
+    to the branch, do a git commit *without the '-m' or a commit message*.
+    If Vim opens, type `:wq` and hit ENTER.
 
 
+### Hosted Repos
 
+-   `git clone REPO_URL`: Makes a local version of the specified GitHub repository
+    in the current working directory.
 
-### GitHub
+-   `git push REPO_URL BRANCH_NAME`: Moves the code written on your local version
+    to the hosted (online) version. The repository URL is often stored as an alias
+    called *origin* (see next bullet). On GitHub.com, the repository url can be found
+    by clicking the green 'Code' button in your repository and clicking on the
+    clipboard next to the url.
 
--   `git clone REPO_URL`: Makes a local version of the specified GitHub repository.
-
--   `git push REPO_URL BRANCH_NAME`: Moves the code written on your local version to the hosted version on GitHub. The repository url can be found by clicking the green 'Code' button in your repository on GitHub.com and clicking on the clipboard next to the url.
-
--   `git add remote REPO_ALIAS_NAME REPO_URL`: Allows you to use an alias for the repository's url instead of having to write the URL in the REPO_URL field of all future commands (in a git push, for example). 'origin' is a very popular alias to use. Aliases must be created for each repository, *but only once*--you should not have to do it when cloning a repository with aliases already created.
+-   `git add remote REPO_ALIAS_NAME REPO_URL`: Allows you to use an alias for the
+    repository's url instead of having to write the URL in the REPO_URL field of
+    all future commands (in a git push, for example). 'origin' is a very popular
+    alias to use. Aliases must be created for each repository, *but only once*--you
+    should not have to do it when cloning a repository that already has aliases.
 
 -   `git remote -v`: Shows all of a repository's aliases.
 
--   `git pull REPO_URL BRANCH_NAME`: Fetches all of the code from the hosted repository and merges it into your your local version of the branch, updating all of your local files. *You use this whenever someone else made a change that affects your branch of code--your code gets updated*.
+-   `git pull REPO_URL BRANCH_NAME`: Fetches all of the code from the hosted repository
+    and merges it into your your local version of the branch, updating all of your local
+    files. *Use this to get the most up-to-date code on a branch.*
+
